@@ -3,15 +3,19 @@ import { IHomeScreenPropsHomeScreenNavigationProp, ScreenName } from "../../navi
 import { ScrollView, StatusBar, View } from "react-native";
 import QrIcon from "../../assets/svg/qr.svg";
 import QrRedIcon from "../../assets/svg/qr-red.svg";
-import { COLORS } from "../../styles/styles";
+import { useState } from "react";
 
 export default function HomeScreen( { navigation, route }: IHomeScreenPropsHomeScreenNavigationProp) {
+    const [text,setText] = useState("");
     return(
         <ScrollView style={{ position: "relative", flex: 1, paddingHorizontal: 20, backgroundColor:"#000"}}>
             <StatusBar />
             <View style={{gap: 10}}>
 
-            <InputField label="Description" />
+            <InputField label="Description" endAdornment={<QrRedIcon/>} />
+            <InputField label="Description" value="text"/>
+            <InputField label="Edit text" value={text} onChangeText={setText} />
+            <InputField label="Description" error="Field empty" />
 
             <Button 
                 onPress={()=>{navigation.navigate(ScreenName.about, {title: ""})}} 

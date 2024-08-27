@@ -12,4 +12,5 @@ export interface IInputProps extends TextInputProps {
     endAdornment?: ReactNode;
     startAdornment?: ReactNode;
     label?: string;
+    error?: string;
 }
