@@ -3,6 +3,7 @@ import { IInputProps } from "./input.model"
 import stylesInput from "./input.styles"
 import { COLORS, appStyles } from "../../../styles/styles"
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated"
+import { useMemo } from "react"
 
 export const InputField = ({
     styles,
@@ -40,11 +41,15 @@ export const InputField = ({
         }
     }
 
+    const disabledColor = useMemo(()=>{
+     return props?.editable === false ? { color: COLORS.grayText}: undefined;
+    }, [props.editable])
+
     return(
-        <Animated.View style={[stylesInput.container, styles?.container, animatedErrorStyles]}>
+        <Animated.View style={[stylesInput.container, styles?.container, props?.editable === false ? stylesInput.disabled : undefined,animatedErrorStyles]}>
             {
                 label  && (
-                    <Animated.Text style={[stylesInput.label, appStyles.textWeight500 ,styles?.label, animatedStyles]}>
+                    <Animated.Text style={[stylesInput.label, appStyles.textWeight500 ,styles?.label, disabledColor , animatedStyles]}>
                         {label}
                     </Animated.Text>
                 )
@@ -65,7 +70,8 @@ export const InputField = ({
                     styles?.input,
                     appStyles.text16,
                     appStyles.textWeight500, 
-                    stylesInput.input
+                    stylesInput.input,
+                    disabledColor
                 ]}
                 placeholderTextColor={COLORS.grayText}
             />

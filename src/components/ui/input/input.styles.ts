@@ -34,5 +34,9 @@ export default StyleSheet.create({
     endAdornment:{
         position: "absolute",
         right: 10,
+    },
+    disabled:{
+        backgroundColor: COLORS.disabled,
+        borderColor: COLORS.disabled,
     }
 })
