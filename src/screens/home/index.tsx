@@ -46,7 +46,7 @@ export default function HomeScreen( { navigation, route }: IHomeScreenPropsHomeS
                 value={phone} 
                 onChangeText={setPhone}
                 placeholderOff={true}
-                mask={['+', '7','(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} 
+                mask={['+', '7','(', /\id/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} 
             />
             <InputMask 
                 label="Phone" 

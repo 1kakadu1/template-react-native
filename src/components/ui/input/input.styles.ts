@@ -1,10 +1,11 @@
-import { StyleSheet } from 'react-native'
+import { Platform, StyleSheet } from 'react-native'
 import { COLORS } from '../../../styles/styles'
 
 export default StyleSheet.create({
     input:{
         color: COLORS.black,
-        paddingTop: 20,
+        transform: [{translateY: Platform.OS === "android" ? 12 : 10}, {translateX: Platform.OS === "android" ? -3 : 0}]
+        //paddingTop: 20,
     },
     label:{
         color: COLORS.grayText,
@@ -43,7 +44,8 @@ export default StyleSheet.create({
         color: COLORS.grayText
     },
     maskWrap:{
-        position: "absolute", bottom: 15,
-        left: 16
+        position: "absolute", 
+        bottom: 14,
+        left: 17
     }
 })
