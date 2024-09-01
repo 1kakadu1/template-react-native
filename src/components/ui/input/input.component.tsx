@@ -1,9 +1,9 @@
-import {  NativeSyntheticEvent, Text, TextInput, TextInputFocusEventData, TouchableHighlight, View } from "react-native"
+import {  NativeSyntheticEvent, TextInput, TextInputFocusEventData, TouchableHighlight, View } from "react-native"
 import { IInputProps } from "./input.model"
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated"
+import { useMemo, useState } from "react"
 import stylesInput from "./input.styles"
 import { COLORS, appStyles } from "../../../styles/styles"
-import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated"
-import { useMemo } from "react"
 
 export const InputField = ({
     styles,
@@ -12,8 +12,10 @@ export const InputField = ({
     label,
     value,
     error,
+    beforeElement,
     ...props
 } : IInputProps) =>{
+    const [focus, setFocus] = useState(false);
     const transformY = useSharedValue(value ? 10 : 18);
     const fontSize = useSharedValue(value ? 12 : 16);
     const errorSharedValue = useSharedValue(error ? COLORS.red : COLORS.grayDesign);
@@ -54,16 +56,19 @@ export const InputField = ({
                     </Animated.Text>
                 )
             }
+            { focus ? beforeElement : null}
             <TextInput 
                 {...props}
                 value={value}
                 onFocus={(e: NativeSyntheticEvent<TextInputFocusEventData>) => {
                     props?.onFocus && props?.onFocus(e);
+                    setFocus(true)
                     setActive()
                 }}
                 onBlur={(e: NativeSyntheticEvent<TextInputFocusEventData>) => {
                     props?.onBlur && props?.onBlur(e);
                     unsetActive();
+                    setFocus(false)
                 }}
                 style={[
                     props.style, 

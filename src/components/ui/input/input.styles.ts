@@ -38,5 +38,12 @@ export default StyleSheet.create({
     disabled:{
         backgroundColor: COLORS.disabled,
         borderColor: COLORS.disabled,
+    },
+    maskText:{
+        color: COLORS.grayText
+    },
+    maskWrap:{
+        position: "absolute", bottom: 15,
+        left: 16
     }
 })

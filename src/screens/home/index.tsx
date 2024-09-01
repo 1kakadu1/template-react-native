@@ -1,4 +1,4 @@
-import { Button, InputField, SelectField, SelectType } from "../../components/ui";
+import { Button, InputField, SelectField, SelectType, InputMask } from "../../components/ui";
 import { IHomeScreenPropsHomeScreenNavigationProp, ScreenName } from "../../navigation/navigation.model";
 import { ScrollView, StatusBar, View } from "react-native";
 import QrIcon from "../../assets/svg/qr.svg";
@@ -7,13 +7,11 @@ import { useEffect, useState } from "react";
 
 export default function HomeScreen( { navigation, route }: IHomeScreenPropsHomeScreenNavigationProp) {
     const [text,setText] = useState("");
+    const [phone,setPhone] = useState("");
+    const [phoneInit,setPhoneinit] = useState("980");
     const [select, setSelect]= useState< SelectType<any> | undefined>(undefined);
     const [selectInit, setSelectInit]= useState< SelectType<any> | undefined>({title: "3", value: 3});
-    
-    useEffect(()=>{
-        console.log("select",selectInit)
-    }, [selectInit])
-    
+
     return(
         <ScrollView style={{ position: "relative", flex: 1, paddingHorizontal: 20, backgroundColor:"#fff"}}>
             <StatusBar />
@@ -43,7 +41,20 @@ export default function HomeScreen( { navigation, route }: IHomeScreenPropsHomeS
             <InputField label="Description editable" value="text" editable={false} />
             <InputField label="Edit text" value={text} onChangeText={setText} />
             <InputField label="Description" error="Field empty" />
-
+            <InputMask 
+                label="Phone" 
+                value={phone} 
+                onChangeText={setPhone}
+                placeholderOff={true}
+                mask={['+', '7','(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} 
+            />
+            <InputMask 
+                label="Phone" 
+                value={phoneInit} 
+                onChangeText={setPhoneinit}
+                placeholderOff={true}
+                mask={['+', '7','(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]} 
+            />
             <Button 
                 onPress={()=>{navigation.navigate(ScreenName.about, {title: ""})}} 
                 title="about"/>

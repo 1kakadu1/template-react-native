@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { StyleProp, ViewStyle, TextStyle ,TextInputProps } from "react-native"
+import { Mask } from "react-native-mask-input";
 
 export interface IInputProps extends TextInputProps {
     styles?: {
@@ -13,4 +14,24 @@ export interface IInputProps extends TextInputProps {
     startAdornment?: ReactNode;
     label?: string;
     error?: string;
+    beforeElement?: ReactNode
+}
+
+export interface IInputMaskProps extends IInputProps{
+    mask?: Mask,
+    placeholderOff?: boolean;
+}
+
+export interface IMaskProps extends IInputMaskProps{
+    mask?: Mask,
+    placeholderOff?: boolean;
+    makeMask:{
+        onChangeText: (text: string) => void;
+        value: string;
+        selection: {
+            start: number;
+            end: number;
+        } | undefined;
+        placeholder: string | undefined;
+    }
 }
