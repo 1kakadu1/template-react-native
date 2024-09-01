@@ -8,6 +8,12 @@ export default function AboutScreen(props: AboutScreenNavigationProps) {
             <StatusBar />
             <Text>About</Text>
             <Button onPress={()=>{navigation.goBack()}} title="goBack"/>
+            <Button onPress={()=>{navigation.navigate(
+                ScreenName.qr_code_tabs, 
+                {screen: ScreenName.qr_code, params: undefined })
+                }} 
+                title="QrCode"
+                />  
             <Button onPress={()=>{navigation.navigate(ScreenName.about_detail,{title:""})}} title="modl screen"/>
         </View>
     )
